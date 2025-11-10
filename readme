@@ -1,1 +1,22 @@
-this is ai agent
+# AI Agent Blog Workflow
+
+This repository contains a Jupyter notebook, `autogen_blog_workflow.ipynb`, that demonstrates how to assemble a pair of [Autogen](https://github.com/microsoft/autogen) agents to draft and critique long-form blog content on a user-provided topic.
+
+## OpenRouter configuration
+
+The notebook is pre-configured to route all language model calls through [OpenRouter](https://openrouter.ai):
+
+1. Install the dependencies in the first cell (Autogen uses the OpenAI-compatible Python SDK).
+2. Export your OpenRouter API key before running the configuration cell:
+
+   ```bash
+   export OPENROUTER_API_KEY="sk-or-..."
+   ```
+
+3. Update the placeholder `HTTP-Referer` value in the configuration cell so it matches a domain or repository you control, per OpenRouter policy.
+
+The configuration cell automatically mirrors the `OPENROUTER_API_KEY` into the standard `OPENAI_API_KEY` and points the OpenAI-compatible client at `https://openrouter.ai/api/v1`, ensuring the workflow uses OpenRouter in every cell.
+
+## Running the workflow
+
+Execute the notebook sequentially. Provide a topic in the last cell and the agents will iterate on a draft until the critical reviewer responds with `APPROVED`. The conversation transcript includes all revisions and the final polished blog post.
